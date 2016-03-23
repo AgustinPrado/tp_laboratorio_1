@@ -6,7 +6,7 @@
 int main()
 {
     char seguir = 's';
-    int opcion = 0;
+    int opcion = 0, flagA = 0, flagB = 0;
     float a = 0, b = 0;
     double aux;
 
@@ -33,64 +33,104 @@ int main()
             case 1:
 
                 a = getValue();
+                flagA = 1;
+
                 break;
 
             case 2:
 
                 b = getValue();
+                flagB = 1;
+
                 break;
 
             case 3:
 
-                printf("La suma entre %.2f y %.2f es: %.2f\n\n", a, b, sumar(a,b));
+                if ((flagA == 1) && (flagB == 1))
+                    printf("La suma entre %.2f y %.2f es: %.2f\n\n", a, b, sumar(a,b));
+                else
+                    printf("Ingrese valores de A y B para realizar la operacion\n\n");
+
                 break;
 
             case 4:
 
-                printf("La resta entre %.2f y %.2f es: %.2f\n\n", a, b, restar(a,b));
+                if ((flagA == 1) && (flagB == 1))
+                    printf("La resta entre %.2f y %.2f es: %.2f\n\n", a, b, restar(a,b));
+                else
+                    printf("Ingrese valores de A y B para realizar la operacion\n\n");
+
                 break;
 
             case 5:
 
-                /**< Para el caso que el divisor sea 0 */
-                if (b == 0)
-                    printf("No se puede dividir por 0. Por favor, cambie el valor de B.\n\n");
+                if ((flagA == 1) && (flagB == 1))
+                {
+                    /**< Para el caso que el divisor sea 0 */
+                    if (b == 0)
+                        printf("No se puede dividir por 0. Por favor, cambie el valor de B.\n\n");
+                    else
+                        printf("La division entre %.2f y %.2f es: %.2f\n\n", a, b, dividir(a,b));
+                }
                 else
-                    printf("La division entre %.2f y %.2f es: %.2f\n\n", a, b, dividir(a,b));
+                    printf("Ingrese valores de A y B para realizar la operacion\n\n");
+
                 break;
 
             case 6:
 
-                printf("La multiplicacion entre %.2f y %.2f es: %.2f\n\n", a, b, multiplicar(a,b));
+                if ((flagA == 1) && (flagB == 1))
+                    printf("La multiplicacion entre %.2f y %.2f es: %.2f\n\n", a, b, multiplicar(a,b));
+                else
+                    printf("Ingrese valores de A y B para realizar la operacion\n\n");
+
                 break;
 
             case 7:
 
-                /**< Primero lo paso a int para sacarle la parte decimal */
-                aux = (double)(int)a;
+                if (flagA == 1)
+                {
+                    /**< Primero lo paso a int para sacarle la parte decimal */
+                    aux = (double)(int)a;
 
-                printf("Para calcular el factorial, se tomara solo la parte entera del numero.\n");
-                printf("El factorial de %.0f es: %.0f\n\n", aux, getFactorial(aux));
+                    printf("Para calcular el factorial, se tomara solo la parte entera del numero.\n");
+                    printf("El factorial de %.0f es: %.0f\n\n", aux, getFactorial(aux));
+                }
+                else
+                    printf("Ingrese valor de A para realizar la operacion\n\n");
 
                 break;
 
             case 8:
 
-                printf("La suma entre %.2f y %.2f es: %.2f\n\n", a, b, sumar(a,b));
-                printf("La resta entre %.2f y %.2f es: %.2f\n\n", a, b, restar(a,b));
+                /**< Al separar el if, puedo realizar el factorial en caso de que haya cargado A */
+                if (flagA == 1)
+                {
+                    /**< Primero lo paso a int para sacarle la parte decimal */
+                    aux = (double)(int)a;
 
-                if (b == 0)
-                    printf("No se puede dividir por 0. Por favor, cambie el valor de B.\n\n");
+                    printf("Para calcular el factorial, se tomara solo la parte entera del numero.\n");
+                    printf("El factorial de %.0f es: %.0f\n\n", aux, getFactorial(aux));
+
+                    /**< Si tambien cargó B, realiza el resto de las operaciones */
+                    if (flagB == 1)
+                    {
+                        printf("La suma entre %.2f y %.2f es: %.2f\n\n", a, b, sumar(a,b));
+                        printf("La resta entre %.2f y %.2f es: %.2f\n\n", a, b, restar(a,b));
+
+                        /**< Para el caso que el divisor sea 0 */
+                        if (b == 0)
+                            printf("No se puede dividir por 0. Por favor, cambie el valor de B.\n\n");
+                        else
+                            printf("La division entre %.2f y %.2f es: %.2f\n\n", a, b, dividir(a,b));
+
+                        printf("La multiplicacion entre %.2f y %.2f es: %.2f\n\n", a, b, multiplicar(a,b));
+                    }
+                    else
+                        printf("Ingrese valor de B para realizar el resto de las operaciones\n\n");
+                }
                 else
-                    printf("La division entre %.2f y %.2f es: %.2f\n\n", a, b, dividir(a,b));
-
-                printf("La multiplicacion entre %.2f y %.2f es: %.2f\n\n", a, b, multiplicar(a,b));
-
-                /**< Primero lo paso a int para sacarle la parte decimal */
-                aux = (double)(int)a;
-
-                printf("Para calcular el factorial, se tomara solo la parte entera del numero.\n");
-                printf("El factorial de %.0f es: %.0f\n\n", aux, getFactorial(aux));
+                    printf("Ingrese valores de A y B para realizar las operaciones\n\n");
 
                 break;
 
